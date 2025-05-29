@@ -1,8 +1,8 @@
 import { db, auth } from './config';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 
 /**
- * Inicializa a coleção de tarefas no Firestore com uma tarefa de exemplo
+ * Inicializa a coleção de tarefas no Firestore
  * Esta função deve ser chamada após a autenticação do usuário
  */
 export const initializeTasksCollection = async () => {
@@ -13,22 +13,8 @@ export const initializeTasksCollection = async () => {
       return;
     }
 
-    // Referência à coleção de tarefas
-    const tasksCollection = collection(db, 'tasks');
-    
-    // Criar uma tarefa de exemplo
-    const exampleTask = {
-      title: 'Bem-vindo ao Gerenciador de Tarefas',
-      description: 'Este é um exemplo de tarefa. Você pode adicionar, editar, excluir e filtrar suas tarefas. Use a visualização Kanban para arrastar e soltar tarefas entre diferentes status.',
-      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 dias a partir de hoje
-      priority: 'média',
-      status: 'pendente',
-      createdAt: serverTimestamp(),
-      userId: auth.currentUser.uid
-    };
-    
-    // Adicionar a tarefa de exemplo ao Firestore
-    await addDoc(tasksCollection, exampleTask);
+    // Apenas verificar a coleção de tarefas
+    collection(db, 'tasks');
     console.log('Coleção de tarefas inicializada com sucesso!');
     
   } catch (error) {

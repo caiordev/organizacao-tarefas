@@ -34,12 +34,32 @@ export const getTasks = async () => {
     const snapshot = await getDocs(q);
     
     // Ordenar os resultados no lado do cliente
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      createdAt: doc.data().createdAt?.toDate()?.toISOString() || new Date().toISOString(),
-      dueDate: doc.data().dueDate || ''
-    })).sort((a, b) => {
+    return snapshot.docs.map(doc => {
+      const data = doc.data();
+      let createdAtFormatted;
+      
+      // Verificar o tipo de createdAt e converter adequadamente
+      if (data.createdAt && typeof data.createdAt.toDate === 'function') {
+        // É um timestamp do Firestore
+        createdAtFormatted = data.createdAt.toDate().toISOString();
+      } else if (data.createdAt && data.createdAt instanceof Date) {
+        // É um objeto Date do JavaScript
+        createdAtFormatted = data.createdAt.toISOString();
+      } else if (data.createdAt && typeof data.createdAt === 'string') {
+        // É uma string ISO
+        createdAtFormatted = data.createdAt;
+      } else {
+        // Fallback para data atual
+        createdAtFormatted = new Date().toISOString();
+      }
+      
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: createdAtFormatted,
+        dueDate: data.dueDate || ''
+      };
+    }).sort((a, b) => {
       // Ordenar por data de criação decrescente (mais recente primeiro)
       return new Date(b.createdAt) - new Date(a.createdAt);
     });

@@ -1,29 +1,57 @@
-# to-do
+# Gerenciador de Tarefas com Firebase
 
-This template should help get you started developing with Vue 3 in Vite.
+Um aplicativo de gerenciamento de tarefas desenvolvido com Vue.js e Firebase, permitindo armazenamento em nuvem e sincronização entre dispositivos.
 
-## Recommended IDE Setup
+## Funcionalidades
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Adicionar, editar e excluir tarefas
+- Filtrar tarefas por status (pendente, em andamento, concluída, atrasada)
+- Visualização em lista e Kanban
+- Armazenamento em nuvem com Firebase
+- Autenticação anônima para acesso seguro
+- Design responsivo para desktop e mobile
 
-## Customize configuration
+## Tecnologias Utilizadas
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Vue.js 3 (Composition API)
+- Firebase (Firestore e Authentication)
+- Vite
+- CSS moderno (variáveis CSS, flexbox, grid)
 
-## Project Setup
+## Configuração do Projeto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilação e Hot-Reload para Desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compilação e Minificação para Produção
 
 ```sh
 npm run build
 ```
+
+### Deploy para GitHub Pages
+
+O projeto está configurado para ser facilmente implantado no GitHub Pages. Você pode usar um dos seguintes métodos:
+
+#### Método 1: Script de Deploy
+
+```sh
+npm run deploy
+```
+
+Este comando executará o script `deploy.sh` que fará o build do projeto e o enviará para a branch `gh-pages`.
+
+#### Método 2: GitHub Actions
+
+O projeto inclui um workflow de GitHub Actions que automaticamente faz o deploy para o GitHub Pages sempre que houver um push para a branch `main`.
+
+## Acesso ao Aplicativo
+
+Você pode acessar o aplicativo publicado em: https://caiordev.github.io/organizacao-tarefas/
